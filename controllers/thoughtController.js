@@ -70,8 +70,8 @@ const thoughtController = {
             res.status(500).json(err);
           });
     },
-    addFriend(req, res){
-        User.findOneAndUpdate({_id: req.params.userId}, {$addToSet: {friends: req.params.friendId}}, {new: true})
+    addReaction(req, res){
+        Thought.findOneAndUpdate({_id: req.params.thoughtId}, {$addToSet: {reactions: req.body}}, {runValidators: true, new: true})
         .then((info) =>{
             if (!info){
               return res.status(404)
@@ -79,8 +79,8 @@ const thoughtController = {
             res.json(info)
         });
     },
-    deleteFriend(req, res){
-        User.findOneAndUpdate({_id: req.params.userId}, {$pull: {friends: req.params.friendId}}, {new: true})
+    deleteReaction(req, res){
+        Thought.findOneAndUpdate({_id: req.params.thoughtId}, {$pull: {reactions: {reactionId: req.params.reactionId}}}, {new: true})
         .then((info) =>{
             if (!info){
               return res.status(404)
@@ -92,3 +92,5 @@ const thoughtController = {
           });
     },
 };
+
+module.exports = thoughtController;
