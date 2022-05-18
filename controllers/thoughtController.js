@@ -80,7 +80,7 @@ const thoughtController = {
         });
     },
     deleteReaction(req, res){
-        Thought.findOneAndUpdate({_id: req.params.thoughtId}, {$pull: {reactions: {reactionId: req.params.reactionId}}}, {new: true})
+        Thought.findOneAndUpdate({_id: req.params.thoughtId}, {$pull: {reactions: {_id: req.params.reactionId}}}, {new: true})
         .then((info) =>{
             if (!info){
               return res.status(404)

@@ -54,7 +54,7 @@ const userController = {
             } 
             return Thought.deleteMany( {_id: {$in: info.thoughts} } )
         }).then(() =>
-        res.json({message: "User can't remember thought"})).catch((err) => {
+        res.json({message: "User has left the building"})).catch((err) => {
             console.log(err);
             res.status(500).json(err);
           });
@@ -74,7 +74,7 @@ const userController = {
             if (!info){
               return res.status(404)
             } 
-            res.json(info)
+            res.json({message: "Bye felicia "})
         }).catch((err) => {
             console.log(err);
             res.status(500).json(err);
